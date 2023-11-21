@@ -11,28 +11,29 @@ let myField = null;
 
 const walk = (y, x) => {
     const currentPosX = myField.posX;
-    const currentposY = myField.posY;
-
+    const currentPosY = myField.posY;
     myField.posX += x;
     myField.posY += y;
+    const newPosX = myField.posX;
+    const newPosY = myField.posY;
 
-    if (myField.posX < 0 || myField.posY < 0 || myField.posX >= myField.height || myField.posY >= myField.width){
+    if (newPosX < 0 || newPosY < 0 || newPosX >= myField.height || newPosY >= myField.width){
         process.stdout.write('\nGame over: Out of field');
         myInterface.close();
         process.exit();
     }
-    else if (myField.field[myField.posX][myField.posY] === myField.hole){
+    else if (myField.field[newPosX][newPosY] === myField.hole){
         process.stdout.write('\nGame over: You fell into a hole');
         myInterface.close();   
         process.exit();
     }
-    else if (myField.field[myField.posX][myField.posY] === myField.hat)
+    else if (myField.field[newPosX][newPosY] === myField.hat)
         myField.hatCounter += 1;
     
-    myField.field[myField.posX][myField.posY] = myField.pathCharacter;
-    myField.field[currentPosX][currentposY] = myField.fieldCharacter;
+    myField.field[newPosX][newPosY] = myField.pathCharacter;
+    myField.field[currentPosX][currentPosY] = myField.fieldCharacter;
     myField.print();
-
+    
     process.stdout.write('\nChoose a direction via arrow buttons or press "q" to quit: ');
 }
 
