@@ -17,21 +17,25 @@ const walk = (y, x) => {
     const newPosX = myField.posX;
     const newPosY = myField.posY;
 
+    myField.field[currentPosX][currentPosY] = myField.fieldCharacter;
+    myField.print();
+
     if (newPosX < 0 || newPosY < 0 || newPosX >= myField.height || newPosY >= myField.width){
         process.stdout.write('\nGame over: Out of field');
         myInterface.close();
         process.exit();
     }
-    else if (myField.field[newPosX][newPosY] === myField.hole){
+    
+    if (myField.field[newPosX][newPosY] === myField.hole){
         process.stdout.write('\nGame over: You fell into a hole');
         myInterface.close();   
         process.exit();
     }
-    else if (myField.field[newPosX][newPosY] === myField.hat)
+    
+    if (myField.field[newPosX][newPosY] === myField.hat)
         myField.hatCounter += 1;
     
     myField.field[newPosX][newPosY] = myField.pathCharacter;
-    myField.field[currentPosX][currentPosY] = myField.fieldCharacter;
     myField.print();
     
     process.stdout.write('\nChoose a direction via arrow buttons or press "q" to quit: ');
